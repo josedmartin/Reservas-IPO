@@ -1,6 +1,6 @@
 /**********************************************************************/
 /*  PROYECTO RESERVAS             */
-/*  EQUIPO   XXXXX                 */
+/*  EQUIPO   SUECIA               */
 
 * {
   margin: 0;
@@ -35,6 +35,10 @@
 body {
   height: 100vh;
   background-color: var(--color-fondo);
+
+  /*El contenido debe de estar centrado en la pantalla*/
+  display: grid;
+  place-items: center;
 }
 
 /**********************************************************************/
@@ -109,14 +113,34 @@ body {
 
 .sala {
   background-color: var(--color-primario);
+  
+  width: 250px;
+  height: 350px;
+  display: grid;
+  grid-template-columns: minmax(190px,200px);
+  place-content: center;
+  gap: 30px;
 }
 
 .sala__pantalla {
   background-color: var(--color-pantalla);
+
+  height: 70px;
+  /* Declaración por defecto (es innecesaria)
+     Se incluye para indicar que no puede modificada. */
+  width: auto;
+  /*-----*/
+  box-shadow: 0px 0px 10px 10px var(--color-pantalla);
 }
 
-/* .sala__aforo {
-} */
+.sala__aforo {
+  /* Separación entre asientos */
+  gap: 13px;
+  /*----*/
+  height: 200px;
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+}
 
 /**********************************************************************/
 

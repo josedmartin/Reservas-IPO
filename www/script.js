@@ -4,7 +4,7 @@
 // El premabulo tiene como cometido la identificación de la autoría del trabajo
 // El nombre será mostrada en el elemento HTML #equipo de la página web
 // Cada equipo debe actualizar la constante con el nombre del equipo
-const nombreDelEquipoDeLaboratorio = "XXXXX";
+const nombreDelEquipoDeLaboratorio = "SUECIA";
 document.getElementById("equipo").innerHTML = nombreDelEquipoDeLaboratorio;
 
 // -------------------------------------------------------
@@ -229,6 +229,23 @@ function ___actualizaTipoDeAsiento(asientoHTML) {
   //   - modicamos el estilo del asiento seleccionado para que ilustre su tipo
   //   - se actualiza el almacen local (LocalStorage) para reflejar el cambio en el asiento seleccionado
   //   - se actualiza el panel informativo a partir de la información actualizada en el almacen local
+
+  indice = elementoHTML.getAttribute("data-index");
+  if (indice!=null){
+    if(tipoDeAsiento(elementoHTML)==LIBRE){
+      // pasa a seleccionado y se actualiza
+      asientos[indice]=SELECCIONADO;
+      elementoHTML.classList=valorClassDeAsientoSELECCIONADO;
+    }else if(tipoDeAsiento(elementoHTML)==SELECCIONADO){
+      // pasa a libre y se actualiza
+      asientos[indice]=LIBRE;
+      elementoHTML.classList=valorClassDeAsientoLIBRE;
+    } 
+  }
+  //actualiza en LocalStorage y el panel de información
+  actualizaAsientosEnAlmacenLocal();
+  actualizaPanelDeInformacion();
+
 }
 
 // -------------------------------------------------------------------------
@@ -236,10 +253,12 @@ function ___actualizaTipoDeAsiento(asientoHTML) {
 
 function ___recuperaAsientosDelAlmacenLocal() {
   // Devuelve el contendio del ítem  asientos de localStorage
+  return JSON.parse(localStorage.getItem("asientos"));
 }
 
 function ___actualizaAsientosEnAlmacenLocal(asientos) {
   // Actualiza el ítem asientos de localStorage con el parametro asientos
+  localStorage.setItem("asientos",JSON.stringify(asientos));
 }
 
 // -------------------------------------------------------------------------
