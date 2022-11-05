@@ -218,6 +218,27 @@ function pagarReservas() {
 }
 
 //  Funciones para efectuar la reserva (seleccion de asientos y espectaculo)
+
+function tipoDeAsiento(asientoHTML) {
+  /* Los asientos pueden ser LIBRE, OCUPADO o SELECCIONADO, 
+  devolvemos un -1 en caso de error, basicamente que el 
+  elementoHTML no se corresponda con ningun tipo de asiento. */
+
+  const valoresClass = asientoHTML.classList;
+  let tipo = -1;
+
+  if (valoresClass == valorClassDeAsientoLIBRE) {
+    tipo = LIBRE;
+  }
+  if (valoresClass == valorClassDeAsientoOCUPADO) {
+    tipo = OCUPADO;
+  }
+  if (valoresClass == valorClassDeAsientoSELECCIONADO) {
+    tipo = SELECCIONADO;
+  }
+  return tipo;
+}
+
 function ___actualizaTipoDeAsiento(asientoHTML) {
   // Para efectuar la actualizacion debemos:
   //  recuperar del almacen local el item asientos
@@ -229,21 +250,21 @@ function ___actualizaTipoDeAsiento(asientoHTML) {
   //   - modicamos el estilo del asiento seleccionado para que ilustre su tipo
   //   - se actualiza el almacen local (LocalStorage) para reflejar el cambio en el asiento seleccionado
   //   - se actualiza el panel informativo a partir de la información actualizada en el almacen local
-
-  indice = elementoHTML.getAttribute("data-index");
+  const asientos = ___recuperaAsientosDelAlmacenLocal();
+  indice = asientoHTML.getAttribute("data-index");
   if (indice!=null){
-    if(tipoDeAsiento(elementoHTML)==LIBRE){
+    if(tipoDeAsiento(asientoHTML)==LIBRE){
       // pasa a seleccionado y se actualiza
       asientos[indice]=SELECCIONADO;
-      elementoHTML.classList=valorClassDeAsientoSELECCIONADO;
-    }else if(tipoDeAsiento(elementoHTML)==SELECCIONADO){
+      asientoHTML.classList=valorClassDeAsientoSELECCIONADO;
+    }else if(tipoDeAsiento(asientoHTML)==SELECCIONADO){
       // pasa a libre y se actualiza
       asientos[indice]=LIBRE;
-      elementoHTML.classList=valorClassDeAsientoLIBRE;
+      asientoHTML.classList=valorClassDeAsientoLIBRE;
     } 
   }
   //actualiza en LocalStorage y el panel de información
-  actualizaAsientosEnAlmacenLocal();
+  ___actualizaAsientosEnAlmacenLocal(asientos);
   actualizaPanelDeInformacion();
 
 }
