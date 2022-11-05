@@ -9,23 +9,24 @@
   outline: 1px solid red;
 }
 :root {
-  --color-fondo: hsl(0, 5%, 95%);
+  --color-fondo: rgb(71, 74, 89);
 
-  --color-primario: hsl(0, 0%, 0%);
+  --color-primario: hsl(225, 11%, 14%);
   --color-primario-claro: hsl(0, 0%, 50%);
   --color-primario-muy-claro: hsl(0, 0%, 80%);
   --color-sobre-primario: hsl(2, 100%, 100%);
 
-  --color-secundario: hsl(70, 40%, 90%);
+  --color-secundario: hsla(64, 72%, 79%, 0.56);
   --color-sobre-secundario: hsl(2, 0%, 0%);
 
   --fuente-primaria: sans-serif;
   --fuente-secuendaria: serif;
+  --fuente-titulo: Copperplate Gothic Light, fantasy;
 
   --color-pantalla: hsl(0, 100%, 100%);
-  --color-asiento-libre: hsl(0, 50%, 100%);
-  --color-asiento-ocupado: hsl(0, 50%, 80%);
-  --color-asiento-seleccionado: hsl(0, 50%, 40%);
+  --color-asiento-libre: rgb(126, 217, 157);
+  --color-asiento-ocupado: hsl(0, 32%, 47%);
+  --color-asiento-seleccionado: hsl(218, 25%, 49%);
 
   --dimension-asiento: 1.5em;
 }
@@ -35,8 +36,6 @@
 body {
   height: 100vh;
   background-color: var(--color-fondo);
-
-  /*El contenido debe de estar centrado en la pantalla*/
   display: grid;
   place-items: center;
 }
@@ -45,8 +44,11 @@ body {
 
 .panel {
   background-color: var(--color-secundario);
-
+  display: grid;
+  place-items: center;
+  border-radius: 2%;
   width: clamp(600px, 80vw, 800px);
+  row-gap: 1em;
 }
 
 /**********************************************************************/
@@ -68,78 +70,117 @@ body {
 .cartel {
   background-color: var(--color-primario);
   color: var(--color-sobre-primario);
+
+  display: grid;
+  padding: 1em;
+  border-radius: 5%;
+  
+  grid-template-columns:  1fr 1fr;
+  grid-gap: 4px;
+  grid-template-areas: 
+  "area1 area1"
+  "area2 area2"
+  "area3 area4"
+  "area5 area6"
+  "area7 area7";
+  text-align: center;
 }
 
-/* 
-.cartel__pelicula {
 
+.cartel__pelicula {
+  /* Destacamos un poco el Titulo*/
+  font-family: var(--fuente-titulo);
+  font-size: large;
+  grid-area: area1;
 }
 
 .cartel__director {
-
+  font-family: var(--fuente-secuendaria);
+  grid-area: area2;
 }
 
 .cartel__cine {
-
+  font-family: var(--fuente-secuendaria);
+  grid-area: area3;
 }
 
 .cartel__sala {
-
+  font-family: var(--fuente-secuendaria);
+  grid-area: area4;
 }
-.cartel__precio {
 
+.cartel__hora{
+  font-family: var(--fuente-secuendaria);
+  grid-area: area5;
+}
+
+.cartel_fecha{
+  font-family: var(--fuente-secuendaria);
+  grid-area: area6;
+}
+
+.cartel__precio {
+  font-family: var(--fuente-secuendaria);
+  grid-area: area7;
 }
 
 .cartel__precio-cantidad {
+  font-family: var(--fuente-secuendaria);
+  grid-area: area7;
 } 
-*/
+
 
 /**********************************************************************/
 
 .leyendas {
   background-color: var(--color-primario);
   color: var(--color-sobre-primario);
-
+  padding: 4px;
+  
   list-style-type: none;
+
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  
 }
 
-/* .leyendas__item {
+.leyendas__item {
+  display: grid;
+  justify-items: center;
+  row-gap: 5px;
+  
 }
 
 .leyendas__leyenda {
-} */
+  font-size: small;
+}
 
 /**********************************************************************/
 
 .sala {
   background-color: var(--color-primario);
-  
-  width: 250px;
-  height: 350px;
   display: grid;
-  grid-template-columns: minmax(190px,200px);
-  place-content: center;
-  gap: 30px;
+  justify-content: center;
+  border-radius: 5%;
+  padding-left: 3em;
+  padding-right: 3em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .sala__pantalla {
   background-color: var(--color-pantalla);
-
-  height: 70px;
-  /* Declaración por defecto (es innecesaria)
-     Se incluye para indicar que no puede modificada. */
-  width: auto;
-  /*-----*/
-  box-shadow: 0px 0px 10px 10px var(--color-pantalla);
+  padding: 2em;
+  margin-bottom: 1em;
+  box-shadow: 0px 0px 10px 2px white;
 }
 
 .sala__aforo {
-  /* Separación entre asientos */
-  gap: 13px;
-  /*----*/
-  height: 200px;
   display: grid;
-  grid-template-columns: repeat(5,1fr);
+  row-gap: 1.5em;
+  column-gap: 1.5em;
+  grid-template-columns: auto auto auto auto auto;
 }
 
 /**********************************************************************/
@@ -147,6 +188,11 @@ body {
 .reserva {
   background-color: var(--color-primario);
   color: var(--color-sobre-primario);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 4px;
+  place-items: center stretch;
+  text-align: center;
 }
 
 .reserva__dato-numerico {
@@ -164,11 +210,23 @@ body {
 .controles {
   background-color: var(--color-primario);
   color: var(--color-sobre-primario);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 1em;
+  padding: 8px;
+  margin-bottom: 1%;
 }
 
 .controles__boton {
   padding: 5px 10px;
+  border-radius: 2px;
 }
+
+#cancelar{
+  background-color: hsl(0, 52%, 68%);
+  color: var(--color-primario);
+}
+
 
 /**********************************************************************/
 
