@@ -1,6 +1,6 @@
 /**********************************************************************/
 /*  PROYECTO RESERVAS             */
-/*  EQUIPO   SUECIA               */
+/*  EQUIPO   Suecia                 */
 
 * {
   margin: 0;
@@ -127,6 +127,7 @@ body {
 .cartel__precio-cantidad {
   font-family: var(--fuente-secuendaria);
   grid-area: area7;
+
 } 
 
 
