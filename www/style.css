@@ -1,217 +1,259 @@
 /**********************************************************************/
-/*  PROYECTO PIANO */
-/*  EQUIPO SUECIA*/
+/*  PROYECTO RESERVAS             */
+/*  EQUIPO   Suecia                 */
 
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-
+  box-sizing: border-box;
   outline: 1px solid red;
 }
-
 :root {
-  --color-fondo: hsl(0, 5%, 95%);
+  --color-fondo: rgb(71, 74, 89);
 
-  --color-primario: hsl(209, 49%, 26%);
-  --color-primario-claro: hsla(70, 11%, 46%, 0.856);
+  --color-primario: hsl(225, 11%, 14%);
+  --color-primario-claro: hsl(0, 0%, 50%);
   --color-primario-muy-claro: hsl(0, 0%, 80%);
   --color-sobre-primario: hsl(2, 100%, 100%);
 
-  --color-secundario: hsl(69, 57%, 88%);
+  --color-secundario: hsla(64, 72%, 79%, 0.56);
   --color-sobre-secundario: hsl(2, 0%, 0%);
 
   --fuente-primaria: sans-serif;
   --fuente-secuendaria: serif;
+  --fuente-titulo: Copperplate Gothic Light, fantasy;
 
-  --color-tecla-blanca: hsl(0, 100%, 100%);
-  --color-tecla-blanca-pulsada: hsl(0, 10%, 98%);
-  --color-tecla-negra: hsl(0, 0%, 0%);
-  --color-tecla-negra-pulsada: hsl(0, 0%, 40%);
+  --color-pantalla: hsl(0, 100%, 100%);
+  --color-asiento-libre: rgb(126, 217, 157);
+  --color-asiento-ocupado: hsl(0, 32%, 47%);
+  --color-asiento-seleccionado: hsl(218, 25%, 49%);
+
+  --dimension-asiento: 1.5em;
 }
 
 /**********************************************************************/
+
 body {
   height: 100vh;
   background-color: var(--color-fondo);
-  display: flex;
-  place-items: center;
-  justify-content: center;
-}
-
-/**********************************************************************/
-
-.lienzo {
   display: grid;
-  align-items: center;
-  width: clamp(600px, 80vw, 1000px);
-  height: clamp(400px, 80vh, 700px);
+  place-items: center;
+}
 
+/**********************************************************************/
+
+.panel {
   background-color: var(--color-secundario);
-
-  border-radius: 15px;
-  padding: 1em;
-  grid-template-areas: 
-  "area1 area1 area1"
-  "area2 area3 area3";
+  display: grid;
+  place-items: center;
+  border-radius: 2%;
+  width: clamp(600px, 80vw, 800px);
+  row-gap: 1em;
 }
 
 /**********************************************************************/
-.cabecera {
+
+.titulo {
+  padding: 0.2em 0.5em;
+  margin-top: 1em;
+
   background-color: var(--color-primario);
   color: var(--color-sobre-primario);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  padding: 1em;
 
-  text-align: center;
   text-transform: uppercase;
+  text-align: center;
   font-size: 1.2rem;
-
-  grid-area: area1;
-  align-self: center;
 }
 
 /**********************************************************************/
 
-.osciladores {
+.cartel {
   background-color: var(--color-primario);
   color: var(--color-sobre-primario);
 
-  /* Estética */
+  display: grid;
   padding: 1em;
+  border-radius: 5%;
   
+  grid-template-columns:  1fr 1fr;
+  grid-gap: 4px;
+  grid-template-areas: 
+  "area1 area1"
+  "area2 area2"
+  "area3 area4"
+  "area5 area6"
+  "area7 area7";
+  text-align: center;
+}
 
-  display: flex;
-  flex-direction: column;
-  justify-self: center;
-  align-self: center;
-  justify-content: space-evenly;
-  align-items: flex-end;
+
+.cartel__pelicula {
+  /* Destacamos un poco el Titulo*/
+  font-family: var(--fuente-titulo);
+  font-size: large;
+  grid-area: area1;
+}
+
+.cartel__director {
+  font-family: var(--fuente-secuendaria);
   grid-area: area2;
-  
 }
 
-.osciladores::before {
-  border-left: 15px solid rgb(0, 38, 255);
-  border-top: rgb(0, 255, 72) 15px solid;
+.cartel__cine {
+  font-family: var(--fuente-secuendaria);
+  grid-area: area3;
 }
 
-.osciladores::after {
-  border-left: red 15px solid;
+.cartel__sala {
+  font-family: var(--fuente-secuendaria);
+  grid-area: area4;
+}
+
+.cartel__hora{
+  font-family: var(--fuente-secuendaria);
+  grid-area: area5;
+}
+
+.cartel_fecha{
+  font-family: var(--fuente-secuendaria);
+  grid-area: area6;
+}
+
+.cartel__precio {
+  font-family: var(--fuente-secuendaria);
+  grid-area: area7;
+}
+
+.cartel__precio-cantidad {
+  font-family: var(--fuente-secuendaria);
+  grid-area: area7;
+
 } 
 
-.oscilador {
+
+/**********************************************************************/
+
+.leyendas {
+  background-color: var(--color-primario);
+  color: var(--color-sobre-primario);
+  padding: 4px;
+  
+  list-style-type: none;
+
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  
+}
+
+.leyendas__item {
+  display: grid;
+  justify-items: center;
+  row-gap: 5px;
+  
+}
+
+.leyendas__leyenda {
+  font-size: small;
+}
+
+/**********************************************************************/
+
+.sala {
+  background-color: var(--color-primario);
+  display: grid;
+  justify-content: center;
+  border-radius: 5%;
+  padding-left: 3em;
+  padding-right: 3em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.sala__pantalla {
+  background-color: var(--color-pantalla);
+  padding: 2em;
+  margin-bottom: 1em;
+  box-shadow: 0px 0px 10px 2px white;
+}
+
+.sala__aforo {
+  display: grid;
+  row-gap: 1.5em;
+  column-gap: 1.5em;
+  grid-template-columns: auto auto auto auto auto;
+}
+
+/**********************************************************************/
+
+.reserva {
+  background-color: var(--color-primario);
+  color: var(--color-sobre-primario);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 4px;
+  place-items: center stretch;
+  text-align: center;
+}
+
+.reserva__dato-numerico {
   background-color: var(--color-primario-claro);
   color: var(--color-sobre-primario);
 
-  padding: 0.5em;
-  border-radius: 10px;
-}
-
-.oscilador--activo {
-  background-color: var(--color-secundario);
-  color: var(--color-sobre-secundario);
+  /* Anchura para admitir números de dos cifras */
+  display: inline-block;
+  width: 2.5em;
+  text-align: center;
 }
 
 /**********************************************************************/
-.teclado {
-  background-color: var(--color-primario-claro);
-  width: 90%;
-  height: 90%;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+
+.controles {
+  background-color: var(--color-primario);
+  color: var(--color-sobre-primario);
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-
-  margin: 1em;
-  grid-area: area3;
-  position: relative;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 1em;
+  padding: 8px;
+  margin-bottom: 1%;
 }
+
+.controles__boton {
+  padding: 5px 10px;
+  border-radius: 2px;
+}
+
+#cancelar{
+  background-color: hsl(0, 52%, 68%);
+  color: var(--color-primario);
+}
+
 
 /**********************************************************************/
 
-.tecla {
-  border: 1px solid var(--color-tecla-negra);
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  padding: 0.5em;
+.asiento {
+  width: var(--dimension-asiento);
+  height: var(--dimension-asiento);
+  background-color: var(--color-asiento-libre);
+
+  border: 2px solid black;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
-/**********************************************************************/
-.tecla--blanca {
-  background-color: var(--color-tecla-blanca);
+.asiento--ocupado {
+  background-color: var(--color-asiento-ocupado);
 }
 
-.tecla--blanca:hover {
-  background-color: var(--color-tecla-blanca-pulsada);
+.asiento--seleccionado {
+  background-color: var(--color-asiento-seleccionado);
 }
 
-/**********************************************************************/
-.tecla--negra {
-  background-color: var(--color-tecla-negra);
-  color: white;
-
-  width: 10%;
-  height: 65%;
-  
-  position: absolute;
-}
-
-.tecla--negra:hover {
-  background-color: var(--color-tecla-negra-pulsada);
-}
-
-/**********************************************************************/
-
-/* El teclaso consta de:
-     - 7 teclas blancas (do,re,mi,da,sol,la,si)
-     - 5 teclas negras  (do#, re#, fa#, sol#, la#) 
+/* No es factible reservar un asiento ocupado. 
+   Para reforzar esta restricción se modifica 
+   el estilo al sobrevolar con el cursor sobre 
+   un asiento no ocupado (i.e. libre o selecciodo) 
 */
-
-/*  El teclado se visualiza desde una perspectiva cenital (desde arriba) 
-    Por tanto, podemos hablar de altura y anchura de las teclas */
-
-/*  Respecto a la altura de las teclas 
-    - La altura de todas las teclas blancas es igual a la altura del teclado
-    - Las alturas de las teclas negras ocupan aproximadamente un 2/3 de la altura 
-      del teclado. 
-*/
-
-/*  Respecto a la anchura de las teclas
-    - La anchura de las 7 teclas blancas es igual, cubriendo de forma 
-      equitativa toda la anchura del teclado. 
-    - La anchura de todas las teclas negras es igual, pero su anchura es 
-      aproximadamente 2/3 de la anchura de una tecla blanca  
-*/
-
-/* Las teclas negras se posiciona entre dos teclas blancas  
-       do#  entre  do y re 
-       re#  entre  re y mi 
-       fa#  entre  fa y sol
-       sol# entre sol y la
-       la#  entre  la y si
-  La tecla negra se posiciona de forma simétrica (i.e. la mitad de la anchura de 
-  la tecla negra en cada una de las dos teclas blancas)
-*/
-
-.do-sostenido {
-  left: 9.5%;
+.sala .asiento:hover:not(.asiento--ocupado) {
+  cursor: pointer;
 }
-.re-sostenido {
-  left: 23.5%;
-}
-.fa-sostenido {
-  left: 52%;
-}
-.sol-sostenido {
-  left: 66.5%;
-}
-.la-sostenido {
-  left: 80.5%;
-}
-
-/**********************************************************************/
